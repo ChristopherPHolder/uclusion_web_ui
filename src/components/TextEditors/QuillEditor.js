@@ -11,8 +11,10 @@ import NoOpUploader from './NoOpUploader';
 import CustomQuillClipboard from './CustomQuillClipboard';
 import QuillTableUI from 'quill-table-ui';
 import 'quill/dist/quill.snow.css';
+import './editorStyles.css';
 import 'quill-table-ui/dist/index.css';
-
+import hljs from 'highlight.js';
+import 'highlight.js/styles/idea.css';
 import { injectIntl } from 'react-intl';
 import { withTheme } from '@material-ui/core';
 import _ from 'lodash';
@@ -76,6 +78,9 @@ class QuillEditor extends React.PureComponent {
       setOperationInProgress,
     } = props;
     const defaultModules = {
+      syntax: {
+        hljs,
+      },
       toolbar: [
         [{ font: [] }],
         [{ header: [1, 2, false] }],

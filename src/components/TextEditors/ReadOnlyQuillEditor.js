@@ -1,9 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
+
 import Quill from "quill";
+import 'quill/dist/quill.snow.css';
+import './editorStyles.css';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/idea.css';
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
-
 const useStyles = makeStyles(
   theme => {
     return {
