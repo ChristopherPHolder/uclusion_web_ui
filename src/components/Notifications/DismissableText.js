@@ -2,51 +2,43 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { DISMISS, DismissTextContext } from '../../contexts/DismissTextContext';
-import IconButton from '@material-ui/core/IconButton';
-import LiveHelpTwoToneIcon from '@material-ui/icons/LiveHelpTwoTone';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import Button from '@material-ui/core/Button';
+import LiveHelpOutlinedIcon from '@material-ui/icons/LiveHelpOutlined';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
+    display: 'flex',
+    margin: theme.spacing(2, 0),
     backgroundColor: theme.palette.grey["300"],
     borderRadius: 6,
-    padding: 0,
   },
   leftMost: {
-    margin: 0,
-    marginLeft: theme.spacing(1),
-    fontSize: 16,
-    flex: 10.5,
-    padding: '14px',
-    display: 'flex'
+    margin: theme.spacing(1)
   },
-  rightMost: {
-    flex: 1.5,
-    marginLeft: 'auto',
-    margin: 0,
-    display: 'flex',
-    justifyContent: 'flex-end'
+  helpIcon: {
+    fill: theme.palette.primary.dark
   },
-  dismissText: {
-    transform: 'scale(0.7)',
-    margin: 0,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end'
-  },
-  pointer: {
-    cursor: 'pointer',
-    textDecoration: 'underline'
-  },
-  hoverState: {
-    '&:hover': {
-      backgroundColor: "transparent",
+  helpMessage: {
+    flexGrow: 1,
+    margin: theme.spacing(1, 1, 1, 0),
+    fontSize: 18,
+    '& p': {
+      marginTop: 2
     }
   },
-  help: {
-    marginRight: '6px'
+  dismissText: {
+    margin: theme.spacing(1)
+  },
+  dismissButton: {
+    fontSize: 12,
+    textTransform: 'none',
+    textDecoration: 'underline'
+  },
+  dismissIcon: {
+    marginLeft: theme.spacing(-0.5),
+    fill: theme.palette.primary.dark
   }
 }));
 
@@ -66,22 +58,27 @@ function DismissableText(props) {
   }
 
   return (
-    <dl className={classes.root} >
-      <dl className={classes.leftMost}>
-        <LiveHelpTwoToneIcon color="inherit" fontSize="small" className={classes.help}/>
-        <FormattedMessage id={textId} />
-      </dl>
-      <dl className={classes.rightMost}>
-        <dd className={classes.dismissText}>
-          <span role="button" onClick={dismiss} className={classes.pointer}>
-            <FormattedMessage id="decisionDialogsDismissDialog" />
-            <IconButton className={classes.hoverState} disableRipple>
-              <CancelRoundedIcon />
-            </IconButton>
-          </span>
-        </dd>
-      </dl>
-    </dl>
+    <div className={classes.root}>
+
+      <div className={classes.leftMost}>
+        <LiveHelpOutlinedIcon className={classes.helpIcon} />
+      </div>
+
+      <div className={classes.helpMessage}>
+        <p><FormattedMessage id={textId} /></p>
+      </div>
+
+      <div className={classes.dismissText}>
+        <Button
+          endIcon={<CancelIcon className={classes.dismissIcon} />}
+          className={classes.dismissButton}
+          size="small"
+          onClick={dismiss}>
+          <FormattedMessage id="decisionDialogsDismissDialog" />
+        </Button>
+      </div>
+
+    </div>
   );
 }
 
